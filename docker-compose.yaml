@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    working_dir: /go/src/github.com/mamoroom/go-ffmpeg-mock
+    volumes:
+      - .:/go/src/github.com/mamoroom/go-ffmpeg-mock
+    ports:
+      - 8000:8000
