@@ -2,3 +2,5 @@ tmp/
 .DS_Store
 .vscode
 data/out1.mp4
+app-secret-stg.yaml
+local.env

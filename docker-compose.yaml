@@ -4,8 +4,31 @@ services:
   app:
     build:
       context: .
+      dockerfile: ./docker/app/Dockerfile
     working_dir: /go/src/github.com/mamoroom/go-ffmpeg-mock
     volumes:
       - .:/go/src/github.com/mamoroom/go-ffmpeg-mock
     ports:
-      - 8000:8000
+      - 8000:8080
+    depends_on:
+      - storage
+    links:
+      - storage:storage
+    environment:
+      - GCS_ASSET_BUCKET=${GCS_ASSET_BUCKET}
+      - DATASTORE_PROJECT_ID=${GCP_PROJECT_ID}
+      - STORAGE_EMULATOR_HOST=storage:4443
+      - GCP_PROJECT_LOCATION=${GCP_PROJECT_LOCATION}
+
+  storage:
+    image: fsouza/fake-gcs-server
+    ports:
+      - 4443:4443
+    volumes:
+      - ./docker/storage/data:/data
+    command: --scheme http --public-host localhost
+
+networks:
+  default:
+    external:
+      name: go-ffmpeg-mock_shared

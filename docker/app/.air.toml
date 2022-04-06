@@ -1,0 +1,4 @@
+[build]
+# Just plain old shell command. You could use `make` as well.
+cmd = "go build -o ./bin/ffmpeg-go/main ./cmd/ffmpeg-go/main.go"
+bin = "./bin/ffmpeg-go/main"

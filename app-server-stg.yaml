@@ -1,0 +1,6 @@
+runtime: go116
+service: ffmpeg-mock
+instance_class: F4_1G
+includes:
+  - app-secret-stg.yaml
+main: ./cmd/ffmpeg-go
